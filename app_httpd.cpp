@@ -345,7 +345,7 @@ static esp_err_t back_handler(httpd_req_t *req){
 }
 
 static esp_err_t left_handler(httpd_req_t *req){
-    WheelAct(LOW, High, LOW, LOW);
+    WheelAct(LOW, HIGH, LOW, LOW);
     Serial.println("Left");
     httpd_resp_set_type(req, "text/html");
     return httpd_resp_send(req, "OK", 2);
