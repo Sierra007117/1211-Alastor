@@ -18,14 +18,14 @@
 #include "camera_index.h"
 #include "Arduino.h"
 
-extern int gpLb;
-extern int gpLf;
-extern int gpRb;
-extern int gpRf;
+extern int gpSteerRight;
+extern int gpSteerLeft;
+extern int gpForward;
+extern int gpBackward;
 extern int gpLed;
 extern String WiFiAddr;
 
-void WheelAct(int nLf, int nLb, int nRf, int nRb);
+void WheelAct(int nSteerLeft, int nSteerRight, int nBackward, int nForward);
 
 typedef struct {
         size_t size; //number of values used for filtering
@@ -332,26 +332,26 @@ static esp_err_t index_handler(httpd_req_t *req){
 }
 
 static esp_err_t go_handler(httpd_req_t *req){
-    WheelAct(HIGH, LOW, HIGH, LOW);
+    WheelAct(LOW, LOW, HIGH, LOW);
     Serial.println("Go");
     httpd_resp_set_type(req, "text/html");
     return httpd_resp_send(req, "OK", 2);
 }
 static esp_err_t back_handler(httpd_req_t *req){
-    WheelAct(LOW, HIGH, LOW, HIGH);
+    WheelAct(LOW, LOW, LOW, HIGH);
     Serial.println("Back");
     httpd_resp_set_type(req, "text/html");
     return httpd_resp_send(req, "OK", 2);
 }
 
 static esp_err_t left_handler(httpd_req_t *req){
-    WheelAct(HIGH, LOW, LOW, HIGH);
+    WheelAct(LOW, High, LOW, LOW);
     Serial.println("Left");
     httpd_resp_set_type(req, "text/html");
     return httpd_resp_send(req, "OK", 2);
 }
 static esp_err_t right_handler(httpd_req_t *req){
-    WheelAct(LOW, HIGH, HIGH, LOW);
+    WheelAct(HIGH, LOW, LOW, LOW);
     Serial.println("Right");
     httpd_resp_set_type(req, "text/html");
     return httpd_resp_send(req, "OK", 2);
@@ -486,10 +486,10 @@ void startCameraServer(){
     }
 }
 
-void WheelAct(int nLf, int nLb, int nRf, int nRb)
+void WheelAct(int nSteerLeft, int nSteerRight, int nBackward, int nForward)
 {
- digitalWrite(gpLf, nLf);
- digitalWrite(gpLb, nLb);
- digitalWrite(gpRf, nRf);
- digitalWrite(gpRb, nRb);
+ digitalWrite(gpSteerLeft, nSteerLeft);
+ digitalWrite(gpSteerRight, nSteerRight);
+ digitalWrite(gpBackward, nBackward);
+ digitalWrite(gpForward, nForward);
 }
