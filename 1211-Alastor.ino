@@ -12,11 +12,12 @@
 //#define CAMERA_MODEL_WROVER_KIT
 //#define CAMERA_MODEL_M5STACK_PSRAM
 #define CAMERA_MODEL_AI_THINKER
-
-const char* ssid = "HUTCyka Blyat";   //Enter SSID WIFI Name
-const char* password = "cyka blyat";   //Enter WIFI Password
-// i'm too lazy to remove mine,but make sure you put yours before flashing the firmware~
-
+#include "WAC.h"
+const char *ssid = SSID;
+const char *password = PW;
+//Create WAC.h to store creds
+//#define SSID "Wireless Access Point"
+//#define PW "Password"
 #if defined(CAMERA_MODEL_WROVER_KIT)
 #define PWDN_GPIO_NUM    -1
 #define RESET_GPIO_NUM   -1
