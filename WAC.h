@@ -1,2 +1,2 @@
-#define SSID "Wireless Access Point"
-#define PW "Password"
+#define SSID ""
+#define PW ""
